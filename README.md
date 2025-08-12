@@ -123,6 +123,27 @@ streamdeck-droidcam/
 └── docs/                  # Documentation
 ```
 
+### Release Process
+
+This project uses automated releases through GitHub Actions. To create a release:
+
+1. **Create and push a version tag:**
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+
+2. **Automated process:**
+   - GitHub Actions automatically builds the plugin
+   - Creates a GitHub Release with release notes
+   - Uploads the `.streamDeckPlugin` file as a downloadable asset
+
+3. **Manual packaging (development only):**
+   ```bash
+   bun run build
+   streamdeck pack works.nantoka.droidcam.sdPlugin --force
+   ```
+
 ## 📝 Documentation
 
 - [Stream Deck Development Guide](docs/STREAM_DECK_DEVELOPMENT.md) - Technical implementation patterns and best practices
