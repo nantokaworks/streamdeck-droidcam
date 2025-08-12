@@ -36,7 +36,7 @@ jobs:
         run: |
           # GitHub Actionsではバージョンインクリメントをスキップ
           export SKIP_VERSION_INCREMENT=true
-          rollup -c
+          bun run build
         
       - name: Verify build output
         run: |
