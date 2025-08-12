@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <!-- Simple camera lens icon for zoom control -->
+  <g fill="#ffffff">
+    <!-- Outer ring -->
+    <path d="M14,2 C7.4,2 2,7.4 2,14 C2,20.6 7.4,26 14,26 C20.6,26 26,20.6 26,14 C26,7.4 20.6,2 14,2 Z M14,24 C8.5,24 4,19.5 4,14 C4,8.5 8.5,4 14,4 C19.5,4 24,8.5 24,14 C24,19.5 19.5,24 14,24 Z"/>
+    <!-- Inner circle -->
+    <circle cx="14" cy="14" r="4"/>
+  </g>
+</svg>

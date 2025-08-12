@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.elgato.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(streamdeck:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "WebFetch(domain:www.dev47apps.com)",
+      "Bash(bun run:*)",
+      "WebFetch(domain:files.dev47apps.net)",
+      "Bash(ls:*)",
+      "WebFetch(domain:play-lh.googleusercontent.com)",
+      "Bash(git rev-list:*)",
+      "Bash(log show:*)",
+      "Bash(cp:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)",
+      "Bash(grep:*)",
+      "Bash(mkdir:*)",
+      "Bash(/usr/bin/diff -u /Users/toka/Abyss/streamdeck-droidcam/src_backup/actions/zoom-control.ts /Users/toka/Abyss/streamdeck-droidcam/src/actions/zoom-control.ts)"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g>
+    <polyline points="90.91 40 104 40 104 53.09" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    <polyline points="90.91 104 104 104 104 90.91" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    <polyline points="53.09 104 40 104 40 90.91" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    <polyline points="53.09 40 40 40 40 53.09" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+  </g>
+  <path d="M68.95,75.45l-1.24,1.4c-2.68,2.68-7.02,2.68-9.7,0-2.68-2.68-2.68-7.02,0-9.7,2.68-2.68,7.02-2.68,9.7,0h0s8.59,9.7,8.59,9.7c2.68,2.68,7.02,2.68,9.7,0,2.68-2.68,2.68-7.02,0-9.7-2.68-2.68-7.02-2.68-9.7,0,0,0,0,0,0,0l-1.24,1.4" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+</svg>

@@ -1,0 +1,170 @@
+{
+  "Name": "DroidCam",
+  "Description": "Complete control of DroidCam from Stream Deck",
+  "Category": "DroidCam",
+
+  "works.nantoka.droidcam.connection-status": {
+    "Name": "Connection Status",
+    "Tooltip": "Check DroidCam connection status"
+  },
+
+  "works.nantoka.droidcam.camera-switch": {
+    "Name": "Camera Switch",
+    "Tooltip": "Switch between front and back camera"
+  },
+
+  "works.nantoka.droidcam.led-toggle": {
+    "Name": "LED Toggle",
+    "Tooltip": "Toggle camera LED/flash"
+  },
+
+  "works.nantoka.droidcam.mic-toggle": {
+    "Name": "Mic Toggle",
+    "Tooltip": "Toggle microphone on/off"
+  },
+
+  "works.nantoka.droidcam.zoom-control": {
+    "Name": "Zoom Control",
+    "Tooltip": "Control camera zoom with dial",
+    "Encoder": {
+      "TriggerDescription": {
+        "Rotate": "Adjust zoom level",
+        "Push": "Reset zoom to 1x"
+      }
+    }
+  },
+
+  "works.nantoka.droidcam.exposure-control": {
+    "Name": "Exposure Control",
+    "Tooltip": "Control camera exposure with dial",
+    "Encoder": {
+      "TriggerDescription": {
+        "Rotate": "Adjust exposure value",
+        "Push": "Reset exposure to 0"
+      }
+    }
+  },
+
+  "works.nantoka.droidcam.zoom-button": {
+    "Name": "Zoom Button",
+    "Tooltip": "Zoom preset button"
+  },
+
+  "works.nantoka.droidcam.exposure-button": {
+    "Name": "Exposure Button",
+    "Tooltip": "Exposure preset button"
+  },
+
+  "works.nantoka.droidcam.autofocus-button": {
+    "Name": "Autofocus",
+    "Tooltip": "Trigger autofocus"
+  },
+
+  "works.nantoka.droidcam.focus-mode-button": {
+    "Name": "Focus Mode",
+    "Tooltip": "Switch focus mode (Normal/Macro/Continuous/Infinity)"
+  },
+
+  "works.nantoka.droidcam.wb-mode-button": {
+    "Name": "White Balance",
+    "Tooltip": "Switch white balance mode"
+  },
+
+  "works.nantoka.droidcam.exposure-lock-button": {
+    "Name": "Exposure Lock",
+    "Tooltip": "Toggle exposure lock"
+  },
+
+  "works.nantoka.droidcam.wb-lock-button": {
+    "Name": "WB Lock",
+    "Tooltip": "Toggle white balance lock"
+  },
+
+  "works.nantoka.droidcam.stop-restart-button": {
+    "Name": "Stop/Restart",
+    "Tooltip": "Stop or restart DroidCam"
+  },
+
+  "works.nantoka.droidcam.battery-status": {
+    "Name": "Battery Status",
+    "Tooltip": "Display device battery status"
+  },
+
+  "Localization": {
+    "settings.title.connection": "Connection Status Settings",
+    "settings.title.camera": "Camera Switch Settings",
+    "settings.title.led": "LED Toggle Settings",
+    "settings.title.mic": "Mic Toggle Settings",
+    "settings.title.zoom-control": "Zoom Control Settings",
+    "settings.title.exposure-control": "Exposure Control Settings",
+    "settings.title.zoom-button": "Zoom Button Settings",
+    "settings.title.exposure-button": "Exposure Button Settings",
+    "settings.title.autofocus": "Autofocus Settings",
+    "settings.title.focus-mode": "Focus Mode Settings",
+    "settings.title.wb-mode": "White Balance Mode Settings",
+    "settings.title.exposure-lock": "Exposure Lock Settings",
+    "settings.title.wb-lock": "WB Lock Settings",
+    "settings.title.stop-restart": "Stop/Restart Settings",
+    "settings.title.battery": "Battery Status Settings",
+
+    "settings.url": "IP Address / Hostname",
+    "settings.port": "Port",
+    "settings.interval": "Auto-check Interval (seconds)",
+    "settings.sensitivity": "Sensitivity",
+    "settings.zoom-step": "Zoom change per dial tick",
+    "settings.ev-step": "EV change per dial tick",
+    "settings.zoom-values": "Zoom values (comma-separated)",
+    "settings.ev-values": "Exposure values (comma-separated)",
+    "settings.wb-manual": "Manual white balance value",
+    "settings.focus-modes": "Focus modes",
+    "settings.wb-modes": "White balance modes",
+
+    "button.test": "Test Connection",
+    "button.apply": "Apply",
+
+    "message.connected": "Connected successfully",
+    "message.disconnected": "Connection failed",
+    "message.error": "Error: ",
+    "message.saved": "Settings saved",
+    "message.pro-required": "⚠️ Requires DroidCam Pro version",
+    "message.enter-ip": "Please enter IP address or hostname",
+    "message.testing": "Testing connection...",
+
+    "help.check-interval": "Check connection every N seconds",
+
+    "placeholder.url": "e.g., 192.168.1.100",
+    "placeholder.port": "e.g., 4747",
+    "placeholder.interval": "e.g., 5",
+    "placeholder.sensitivity": "0.01 - 3.0",
+    "placeholder.ev-step": "0.1 - 5.0",
+    "placeholder.zoom-values": "e.g., 1.0, 2.0, 4.0, 8.0",
+    "placeholder.ev-values": "e.g., -2.0, -1.0, 0, 1.0, 2.0",
+    "placeholder.wb-manual": "0 - 100",
+
+    "help.zoom-positive": "Positive values zoom in, negative values zoom out",
+    "help.ev-positive": "Positive values increase exposure, negative values decrease",
+
+    "focus.normal": "Normal",
+    "focus.macro": "Macro",
+    "focus.continuous": "Continuous",
+    "focus.infinity": "Infinity",
+
+    "wb.auto": "Auto",
+    "wb.incandescent": "Incandescent",
+    "wb.fluorescent": "Fluorescent",
+    "wb.warm-fluorescent": "Warm Fluorescent",
+    "wb.daylight": "Daylight",
+    "wb.cloudy": "Cloudy",
+    "wb.twilight": "Twilight",
+    "wb.shade": "Shade",
+    "wb.manual": "Manual",
+
+    "settings.display-options": "Display Options",
+    "settings.show-percentage": "Show percentage on icon",
+    "settings.warning-level": "Warning Level (%)",
+    "settings.critical-level": "Critical Level (%)",
+    "settings.polling-interval": "Update Interval (seconds)",
+    "help.polling-interval": "How often to check battery status (5-60 seconds)",
+    "help.battery-status": "This button displays the battery status of your DroidCam device. The icon changes based on the battery level and charging status."
+  }
+}

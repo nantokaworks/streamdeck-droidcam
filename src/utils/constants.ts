@@ -1,0 +1,1 @@
+export const API_POLLING_INTERVAL = 5000; // 5 seconds

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Exposure Control Settings</title>
+    <link rel="stylesheet" href="inspector.css">
+    <script src="i18n.js"></script>
+    <script src="pi.js"></script>
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div style="color: #dc3545; font-weight: bold; font-size: 10pt; margin-bottom: 8px; text-align: center;" data-i18n="warning.pro-required">
+                ⚠️ DroidCam Pro version required
+            </div>
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.url">IP Address / Hostname</div>
+            <input class="sdpi-item-value" id="ipAddress" type="text" data-i18n-placeholder="placeholder.url" placeholder="192.168.1.100 or phone.local" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.port">Port</div>
+            <input class="sdpi-item-value" id="port" type="number" value="4747" min="1" max="65535">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.sensitivity">Sensitivity</div>
+            <input class="sdpi-item-value" id="sensitivity" type="number" value="0.5" min="0.1" max="5" step="0.1" data-i18n-placeholder="placeholder.exposure-sensitivity" placeholder="0.1 - 5.0">
+            <small class="sensitivity-help" data-i18n="help.exposure-sensitivity">EV change amount per dial click (0.1 - 5.0)</small>
+        </div>
+        
+        <div class="sdpi-item" style="align-items: center;">
+            <button id="test-connection" style="flex: 0 0 auto; margin-right: 8px; align-self: center;" data-i18n="button.test">Test Connection</button>
+            <span id="test-result" style="display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 9pt; line-height: 1; vertical-align: middle;"></span>
+        </div>
+    </div>
+
+    <script>
+        let uuid = null;
+        let websocket = null;
+        let settings = {};
+        let saveTimeout = null;
+        
+        // Initialize i18n when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            i18n.init();
+        });
+        
+        window.connectElgatoStreamDeckSocket = (inPort, inPropertyInspectorUUID, inRegisterEvent, inInfo, inActionInfo) => {
+            uuid = inPropertyInspectorUUID;
+            websocket = new WebSocket(`ws://localhost:${inPort}`);
+            
+            if (inActionInfo) {
+                const actionInfo = JSON.parse(inActionInfo);
+                settings = actionInfo.payload.settings || {};
+                
+                if (settings.ipAddress) {
+                    document.getElementById('ipAddress').value = settings.ipAddress;
+                }
+                if (settings.port) {
+                    document.getElementById('port').value = settings.port;
+                }
+                if (settings.sensitivity) {
+                    document.getElementById('sensitivity').value = settings.sensitivity;
+                }
+            }
+            
+            websocket.onopen = () => {
+                websocket.send(JSON.stringify({
+                    event: inRegisterEvent,
+                    uuid: uuid
+                }));
+            };
+            
+            websocket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.event === 'sendToPropertyInspector') {
+                    if (data.payload && data.payload.testResult !== undefined) {
+                        const resultElement = document.getElementById('test-result');
+                        
+                        if (data.payload.testResult) {
+                            resultElement.textContent = i18n.t('message.connected', 'Connected successfully!') + `: ${data.payload.deviceName}`;
+                            resultElement.style.backgroundColor = '#28a745';
+                            resultElement.style.color = '#ffffff';
+                        } else {
+                            resultElement.textContent = i18n.t('message.disconnected', 'Connection failed');
+                            resultElement.style.backgroundColor = '#dc3545';
+                            resultElement.style.color = '#ffffff';
+                        }
+                    }
+                }
+            };
+        };
+        
+        const sendSettings = () => {
+            if (websocket && websocket.readyState === WebSocket.OPEN) {
+                const ipAddress = document.getElementById('ipAddress').value;
+                const port = parseInt(document.getElementById('port').value) || 4747;
+                const sensitivity = parseFloat(document.getElementById('sensitivity').value) || 0.5;
+                
+                settings = { ipAddress, port, sensitivity };
+                
+                websocket.send(JSON.stringify({
+                    event: 'setSettings',
+                    context: uuid,
+                    payload: settings
+                }));
+            }
+        };
+        
+        const debounceSave = () => {
+            if (saveTimeout) {
+                clearTimeout(saveTimeout);
+            }
+            saveTimeout = setTimeout(sendSettings, 500);
+        };
+        
+        document.getElementById('ipAddress').addEventListener('input', debounceSave);
+        document.getElementById('port').addEventListener('input', debounceSave);
+        document.getElementById('sensitivity').addEventListener('input', debounceSave);
+        
+        // 接続テスト（直接fetch APIを使用）
+        document.getElementById('test-connection').addEventListener('click', async () => {
+            const ipAddress = document.getElementById('ipAddress').value;
+            const port = document.getElementById('port').value;
+            const resultElement = document.getElementById('test-result');
+            
+            if (!ipAddress) {
+                resultElement.textContent = i18n.t('message.enter-ip', 'Please enter IP address or hostname');
+                resultElement.style.backgroundColor = '#dc3545';
+                resultElement.style.color = '#ffffff';
+                return;
+            }
+            
+            resultElement.textContent = i18n.t('message.testing', 'Testing connection...');
+            resultElement.style.backgroundColor = '#17a2b8';
+            resultElement.style.color = '#ffffff';
+            
+            try {
+                // DroidCamの端末名を取得してテスト
+                const response = await fetch(`http://${ipAddress}:${port}/v1/phone/name`);
+                
+                if (response.ok) {
+                    const deviceName = await response.text();
+                    resultElement.textContent = i18n.t('message.connected', 'Connected successfully!') + `: ${deviceName}`;
+                    resultElement.style.backgroundColor = '#28a745';
+                    resultElement.style.color = '#ffffff';
+                    
+                    // 設定を保存
+                    sendSettings();
+                    
+                    // プラグインにテスト結果を送信
+                    if (websocket && websocket.readyState === WebSocket.OPEN) {
+                        websocket.send(JSON.stringify({
+                            event: 'sendToPlugin',
+                            action: 'works.nantoka.droidcam.exposure-control',
+                            context: uuid,
+                            payload: {
+                                action: 'testConnection',
+                                success: true,
+                                deviceName: deviceName
+                            }
+                        }));
+                    }
+                } else {
+                    resultElement.textContent = i18n.t('message.disconnected', 'Connection failed') + `: ${response.status}`;
+                    resultElement.style.backgroundColor = '#dc3545';
+                    resultElement.style.color = '#ffffff';
+                }
+            } catch (error) {
+                resultElement.textContent = i18n.t('message.error', 'Error: ') + error.message;
+                resultElement.style.backgroundColor = '#dc3545';
+                resultElement.style.color = '#ffffff';
+            }
+        });
+    </script>
+</body>
+</html>

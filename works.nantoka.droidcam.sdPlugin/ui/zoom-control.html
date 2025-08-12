@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zoom Control Settings</title>
+    <link rel="stylesheet" href="inspector.css">
+    <script src="i18n.js"></script>
+    <script src="pi.js"></script>
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div style="color: #dc3545; font-weight: bold; font-size: 10pt; margin-bottom: 8px; text-align: center;" data-i18n="warning.pro-required">
+                ⚠️ DroidCam Pro version required
+            </div>
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.url">IP Address / Hostname</div>
+            <input class="sdpi-item-value" id="ipAddress" type="text" data-i18n-placeholder="placeholder.url" placeholder="192.168.1.100 or phone.local">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.port">Port</div>
+            <input class="sdpi-item-value" id="port" type="number" value="4747" min="1" max="65535">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.sensitivity">Sensitivity</div>
+            <input class="sdpi-item-value" id="sensitivity" type="number" value="0.1" min="0.01" max="3" step="0.01" data-i18n-placeholder="placeholder.sensitivity" placeholder="0.01 - 3.0">
+            <small class="sensitivity-help" data-i18n="help.zoom-sensitivity">Zoom change amount per dial click (0.01 - 3.0)</small>
+        </div>
+        
+        <div class="sdpi-item" style="align-items: center;">
+            <button id="test-connection" style="flex: 0 0 auto; margin-right: 8px; align-self: center;" data-i18n="button.test">Test Connection</button>
+            <span id="test-result" style="display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 9pt; line-height: 1; vertical-align: middle;"></span>
+        </div>
+    </div>
+
+    <script>
+        let uuid = null;
+        let websocket = null;
+        let settings = {};
+        let saveTimeout = null;
+        let resultDisplayTimeout = null;
+        
+        // Initialize i18n when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            i18n.init();
+        });
+        
+        window.connectElgatoStreamDeckSocket = (inPort, inPropertyInspectorUUID, inRegisterEvent, inInfo, inActionInfo) => {
+            uuid = inPropertyInspectorUUID;
+            websocket = new WebSocket(`ws://localhost:${inPort}`);
+            
+            if (inActionInfo) {
+                const actionInfo = JSON.parse(inActionInfo);
+                settings = actionInfo.payload.settings || {};
+                
+                if (settings.ipAddress) {
+                    document.getElementById('ipAddress').value = settings.ipAddress;
+                }
+                if (settings.port) {
+                    document.getElementById('port').value = settings.port;
+                }
+                if (settings.sensitivity) {
+                    document.getElementById('sensitivity').value = settings.sensitivity;
+                }
+            }
+            
+            websocket.onopen = () => {
+                websocket.send(JSON.stringify({
+                    event: inRegisterEvent,
+                    uuid: uuid
+                }));
+            };
+            
+            // WebSocketメッセージ処理は不要（Direct API使用のため）
+        };
+        
+        const sendSettings = () => {
+            if (websocket && websocket.readyState === WebSocket.OPEN) {
+                const ipAddress = document.getElementById('ipAddress').value;
+                const port = parseInt(document.getElementById('port').value) || 4747;
+                const sensitivity = parseFloat(document.getElementById('sensitivity').value) || 0.1;
+                
+                settings = { ipAddress, port, sensitivity };
+                
+                websocket.send(JSON.stringify({
+                    event: 'setSettings',
+                    context: uuid,
+                    payload: settings
+                }));
+            }
+        };
+        
+        const debounceSave = () => {
+            if (saveTimeout) {
+                clearTimeout(saveTimeout);
+            }
+            saveTimeout = setTimeout(sendSettings, 500);
+        };
+        
+        document.getElementById('ipAddress').addEventListener('input', debounceSave);
+        document.getElementById('port').addEventListener('input', debounceSave);
+        document.getElementById('sensitivity').addEventListener('input', debounceSave);
+        
+        // 結果表示をクリアするヘルパー関数
+        const clearTestResult = () => {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.textContent = '';
+            resultDiv.style.backgroundColor = 'transparent';
+            resultDiv.style.color = '';
+        };
+        
+        // 結果表示を5秒後にクリア
+        const scheduleResultClear = () => {
+            if (resultDisplayTimeout) {
+                clearTimeout(resultDisplayTimeout);
+            }
+            resultDisplayTimeout = setTimeout(clearTestResult, 5000);
+        };
+        
+        // 接続テスト（Connection Status方式）
+        document.getElementById('test-connection').addEventListener('click', async () => {
+            const ipAddress = document.getElementById('ipAddress').value;
+            const port = document.getElementById('port').value;
+            const resultDiv = document.getElementById('test-result');
+            
+            // 既存のタイマーをクリア
+            if (resultDisplayTimeout) {
+                clearTimeout(resultDisplayTimeout);
+            }
+            
+            if (!ipAddress) {
+                resultDiv.textContent = i18n.t('message.enter-ip', 'Please enter IP address or hostname');
+                resultDiv.style.backgroundColor = '#dc3545';
+                resultDiv.style.color = '#ffffff';
+                scheduleResultClear();
+                return;
+            }
+            
+            resultDiv.textContent = i18n.t('message.testing', 'Testing connection...');
+            resultDiv.style.backgroundColor = '#17a2b8';
+            resultDiv.style.color = '#ffffff';
+            
+            try {
+                // DroidCamの端末名を取得してテスト
+                const response = await fetch(`http://${ipAddress}:${port}/v1/phone/name`);
+                
+                if (response.ok) {
+                    const deviceName = await response.text();
+                    resultDiv.textContent = i18n.t('message.connected', 'Connected successfully!') + `: ${deviceName}`;
+                    resultDiv.style.backgroundColor = '#28a745';
+                    resultDiv.style.color = '#ffffff';
+                    
+                    // 設定を保存
+                    sendSettings();
+                } else {
+                    resultDiv.textContent = i18n.t('message.disconnected', 'Connection failed') + `: ${response.status}`;
+                    resultDiv.style.backgroundColor = '#dc3545';
+                    resultDiv.style.color = '#ffffff';
+                }
+                
+                // 結果を5秒間表示
+                scheduleResultClear();
+            } catch (error) {
+                resultDiv.textContent = i18n.t('message.error', 'Error: ') + error.message;
+                resultDiv.style.backgroundColor = '#dc3545';
+                resultDiv.style.color = '#ffffff';
+                
+                // 結果を5秒間表示
+                scheduleResultClear();
+            }
+        });
+    </script>
+</body>
+</html>

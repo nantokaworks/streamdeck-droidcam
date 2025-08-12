@@ -1,0 +1,45 @@
+MIT License
+
+Copyright (c) 2025 nantokaworks
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+DISCLAIMER:
+
+This is an unofficial plugin that is NOT affiliated with, endorsed by, or 
+supported by Dev47Apps (the makers of DroidCam). 
+
+"DroidCam" is a trademark of Dev47Apps. This plugin is an independent project 
+created to enhance the functionality of DroidCam through Stream Deck integration.
+
+This plugin uses DroidCam's HTTP API for communication. By using this plugin, 
+you acknowledge that:
+
+1. This software is provided on an "as is" basis
+2. The author is not responsible for any damage or issues arising from its use
+3. DroidCam's terms of service apply to the use of DroidCam itself
+4. This plugin may stop working if DroidCam's API changes
+
+For support with DroidCam itself, please contact Dev47Apps directly at:
+https://www.dev47apps.com/
+
+For issues specific to this Stream Deck plugin, please use the GitHub Issues:
+https://github.com/nantokaworks/streamdeck-droidcam/issues

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Camera Switch Settings</title>
+    <link rel="stylesheet" href="inspector.css">
+    <script src="i18n.js"></script>
+    <script src="pi-common.js"></script>
+    <script src="pi-components.js"></script>
+</head>
+<body>
+    <div class="sdpi-wrapper" id="content">
+    </div>
+
+    <script>
+        const pi = new PICommon.PropertyInspector({ debug: false });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            PIComponents.PIComponents.initializeI18n();
+            
+            const content = document.getElementById('content');
+            
+            content.appendChild(
+                PIComponents.PIComponents.createConnectionSettings()
+            );
+            
+            content.appendChild(
+                PIComponents.PIComponents.createTestConnectionButton(async () => {
+                    const ipAddress = document.getElementById('ipAddress').value;
+                    const port = document.getElementById('port').value;
+                    
+                    if (!ipAddress) {
+                        return {
+                            success: false,
+                            error: i18n.t('message.enter-ip', 'Please enter IP address or hostname')
+                        };
+                    }
+                    
+                    const result = await pi.testConnection(ipAddress, parseInt(port));
+                    
+                    if (result.success) {
+                        pi.saveSettings();
+                    }
+                    
+                    return result;
+                })
+            );
+            
+            pi.bindAllInputs();
+            
+            pi.onSettingsChange((settings) => {
+                if (settings.ipAddress) {
+                    document.getElementById('ipAddress').value = settings.ipAddress;
+                }
+                if (settings.port) {
+                    document.getElementById('port').value = settings.port;
+                }
+            });
+        });
+        
+        PICommon.setupPropertyInspector(pi);
+    </script>
+</body>
+</html>

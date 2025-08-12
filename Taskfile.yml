@@ -1,0 +1,44 @@
+version: "3"
+
+tasks:
+  claude:
+    env:
+      NEX_ROOT: "{{.ROOT_DIR}}"
+    cmd: claude --dangerously-skip-permissions
+
+  build:
+    desc: "Build the Stream Deck plugin"
+    cmd: bun run build
+
+  dev:
+    desc: "Watch and rebuild on changes"
+    cmd: bun run dev
+
+  clean:
+    desc: "Clean build artifacts"
+    cmd: bun run clean
+
+  install:
+    desc: "Install dependencies"
+    cmd: bun install
+
+  package:
+    desc: "Package the Stream Deck plugin for distribution"
+    deps: [build]
+    cmd: streamdeck pack works.nantoka.droidcam.sdPlugin --force
+
+  validate:
+    desc: "Validate the Stream Deck plugin"
+    cmd: streamdeck validate works.nantoka.droidcam.sdPlugin
+
+  link:
+    desc: "Link plugin to Stream Deck for development"
+    cmd: streamdeck link works.nantoka.droidcam.sdPlugin
+
+  unlink:
+    desc: "Unlink plugin from Stream Deck"
+    cmd: streamdeck unlink works.nantoka.droidcam
+
+  restart:
+    desc: "Restart plugin in Stream Deck (refresh changes)"
+    cmd: streamdeck restart works.nantoka.droidcam

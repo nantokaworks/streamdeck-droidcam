@@ -1,0 +1,170 @@
+{
+  "Name": "DroidCam コントローラー",
+  "Description": "DroidCamを完全制御するStream Deckプラグイン",
+  "Category": "DroidCam",
+  
+  "works.nantoka.droidcam.connection-status": {
+    "Name": "接続状態",
+    "Tooltip": "DroidCamへの接続状態を確認"
+  },
+  
+  "works.nantoka.droidcam.camera-switch": {
+    "Name": "カメラ切り替え",
+    "Tooltip": "前面/背面カメラを切り替え"
+  },
+  
+  "works.nantoka.droidcam.led-toggle": {
+    "Name": "LEDフラッシュ",
+    "Tooltip": "LEDフラッシュのON/OFF切り替え"
+  },
+  
+  "works.nantoka.droidcam.mic-toggle": {
+    "Name": "マイク切り替え",
+    "Tooltip": "マイクのミュート/解除"
+  },
+  
+  "works.nantoka.droidcam.zoom-control": {
+    "Name": "ズーム制御（ダイアル）",
+    "Tooltip": "ダイアルでズームレベルを調整",
+    "Encoder": {
+      "TriggerDescription": {
+        "Rotate": "ズームレベル調整",
+        "Push": "1倍にリセット"
+      }
+    }
+  },
+  
+  "works.nantoka.droidcam.exposure-control": {
+    "Name": "露出制御（ダイアル）",
+    "Tooltip": "ダイアルで露出補正値を調整",
+    "Encoder": {
+      "TriggerDescription": {
+        "Rotate": "露出補正値調整",
+        "Push": "±0にリセット"
+      }
+    }
+  },
+  
+  "works.nantoka.droidcam.zoom-button": {
+    "Name": "ズームボタン",
+    "Tooltip": "ズームレベルをプリセット切り替え"
+  },
+  
+  "works.nantoka.droidcam.exposure-button": {
+    "Name": "露出ボタン",
+    "Tooltip": "露出補正値をプリセット切り替え"
+  },
+  
+  "works.nantoka.droidcam.autofocus-button": {
+    "Name": "オートフォーカス",
+    "Tooltip": "オートフォーカスを実行"
+  },
+  
+  "works.nantoka.droidcam.focus-mode-button": {
+    "Name": "フォーカスモード",
+    "Tooltip": "フォーカスモード切り替え（通常/マクロ/連続/無限遠）"
+  },
+  
+  "works.nantoka.droidcam.wb-mode-button": {
+    "Name": "ホワイトバランス",
+    "Tooltip": "ホワイトバランスモード切り替え"
+  },
+  
+  "works.nantoka.droidcam.exposure-lock-button": {
+    "Name": "露出ロック",
+    "Tooltip": "露出ロックのON/OFF切り替え"
+  },
+  
+  "works.nantoka.droidcam.wb-lock-button": {
+    "Name": "WBロック",
+    "Tooltip": "ホワイトバランスロックのON/OFF切り替え"
+  },
+  
+  "works.nantoka.droidcam.stop-restart-button": {
+    "Name": "停止/再開",
+    "Tooltip": "DroidCamの停止/再開切り替え"
+  },
+  
+  "works.nantoka.droidcam.battery-status": {
+    "Name": "バッテリー状態",
+    "Tooltip": "デバイスのバッテリー状態を表示"
+  },
+  
+  "Localization": {
+    "settings.title.connection": "接続状態設定",
+    "settings.title.camera": "カメラ切り替え設定",
+    "settings.title.led": "LED切り替え設定",
+    "settings.title.mic": "マイク切り替え設定",
+    "settings.title.zoom-control": "ズームコントロール設定",
+    "settings.title.exposure-control": "露出コントロール設定",
+    "settings.title.zoom-button": "ズームボタン設定",
+    "settings.title.exposure-button": "露出ボタン設定",
+    "settings.title.autofocus": "オートフォーカス設定",
+    "settings.title.focus-mode": "フォーカスモード設定",
+    "settings.title.wb-mode": "ホワイトバランスモード設定",
+    "settings.title.exposure-lock": "露出ロック設定",
+    "settings.title.wb-lock": "WBロック設定",
+    "settings.title.stop-restart": "停止/再開設定",
+    "settings.title.battery": "バッテリー状態設定",
+    
+    "settings.url": "IPアドレス / ホスト名",
+    "settings.port": "ポート",
+    "settings.interval": "自動チェック間隔（秒）",
+    "settings.sensitivity": "感度",
+    "settings.zoom-step": "ダイヤル1クリックあたりのズーム変化量",
+    "settings.ev-step": "ダイヤル1クリックあたりのEV変化量",
+    "settings.zoom-values": "ズーム値（カンマ区切り）",
+    "settings.ev-values": "露出補正値（カンマ区切り）",
+    "settings.wb-manual": "手動ホワイトバランス値",
+    "settings.focus-modes": "フォーカスモード",
+    "settings.wb-modes": "ホワイトバランスモード",
+    
+    "button.test": "接続テスト",
+    "button.apply": "適用",
+    
+    "message.connected": "接続成功",
+    "message.disconnected": "接続失敗",
+    "message.error": "エラー：",
+    "message.saved": "設定を保存しました",
+    "message.pro-required": "⚠️ DroidCam Pro版が必要です",
+    "message.enter-ip": "IPアドレスまたはホスト名を入力してください",
+    "message.testing": "接続をテスト中...",
+    
+    "help.check-interval": "N秒ごとに自動的に接続を確認します",
+    
+    "placeholder.url": "例: 192.168.1.100",
+    "placeholder.port": "例: 4747",
+    "placeholder.interval": "例: 5",
+    "placeholder.sensitivity": "0.01 - 3.0",
+    "placeholder.ev-step": "0.1 - 5.0",
+    "placeholder.zoom-values": "例: 1.0, 2.0, 4.0, 8.0",
+    "placeholder.ev-values": "例: -2.0, -1.0, 0, 1.0, 2.0",
+    "placeholder.wb-manual": "0 - 100",
+    
+    "help.zoom-positive": "正の値でズームイン、負の値でズームアウト",
+    "help.ev-positive": "正の値で露出を明るく、負の値で露出を暗く",
+    
+    "focus.normal": "通常",
+    "focus.macro": "マクロ",
+    "focus.continuous": "連続",
+    "focus.infinity": "無限遠",
+    
+    "wb.auto": "自動",
+    "wb.incandescent": "白熱灯",
+    "wb.fluorescent": "蛍光灯",
+    "wb.warm-fluorescent": "温白色蛍光灯",
+    "wb.daylight": "昼光",
+    "wb.cloudy": "曇り",
+    "wb.twilight": "夕暮れ",
+    "wb.shade": "日陰",
+    "wb.manual": "手動",
+
+    "settings.display-options": "表示オプション",
+    "settings.show-percentage": "アイコンにパーセンテージを表示",
+    "settings.warning-level": "警告レベル (%)",
+    "settings.critical-level": "危険レベル (%)",
+    "settings.polling-interval": "更新間隔 (秒)",
+    "help.polling-interval": "バッテリー状態の確認間隔 (5-60秒)",
+    "help.battery-status": "このボタンはDroidCamデバイスのバッテリー状態を表示します。バッテリー残量と充電状態に応じてアイコンが変化します。"
+  }
+}

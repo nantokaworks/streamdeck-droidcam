@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Battery Status Settings</title>
+    <link rel="stylesheet" href="inspector.css">
+    <script src="i18n.js"></script>
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.url">IP Address / Hostname</div>
+            <input class="sdpi-item-value" id="ipAddress" type="text" data-i18n-placeholder="placeholder.url" placeholder="192.168.1.100 or phone.local">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.port">Port</div>
+            <input class="sdpi-item-value" id="port" type="number" value="4747" min="1" max="65535">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.display-options">Display Options</div>
+            <div class="sdpi-item-value">
+                <input type="checkbox" id="showPercentage" checked>
+                <label for="showPercentage" style="margin-left: 5px;" data-i18n="settings.show-percentage">Show percentage on icon</label>
+            </div>
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.warning-level">Warning Level (%)</div>
+            <input class="sdpi-item-value" id="warningLevel" type="number" value="30" min="0" max="100" step="5">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.critical-level">Critical Level (%)</div>
+            <input class="sdpi-item-value" id="criticalLevel" type="number" value="15" min="0" max="100" step="5">
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-label" data-i18n="settings.polling-interval">Update Interval (seconds)</div>
+            <input class="sdpi-item-value" id="pollingInterval" type="number" value="10" min="5" max="60" step="5">
+        </div>
+        
+        <div class="sdpi-item" style="align-items: center;">
+            <button id="test-connection" style="flex: 0 0 auto; margin-right: 8px; align-self: center;" data-i18n="button.test">Test Connection</button>
+            <span id="test-result" style="display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 9pt; line-height: 1; vertical-align: middle;"></span>
+        </div>
+        
+        <div class="sdpi-item">
+            <div class="sdpi-item-child" style="margin-top: 8px; font-size: 11px; color: #999;" data-i18n="help.battery-status">
+                This button displays the battery status of your DroidCam device. The icon color changes based on the battery level: green (normal), orange (warning), red (critical). Battery information is updated automatically.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let websocket = null;
+        let uuid = null;
+        let actionInfo = null;
+        
+        // Initialize i18n when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            i18n.init();
+        });
+        
+        // Property Inspector接続
+        window.connectElgatoStreamDeckSocket = (inPort, inPropertyInspectorUUID, inRegisterEvent, inInfo, inActionInfo) => {
+            uuid = inPropertyInspectorUUID;
+            actionInfo = JSON.parse(inActionInfo);
+            
+            // WebSocket接続
+            websocket = new WebSocket(`ws://localhost:${inPort}`);
+            
+            websocket.onopen = () => {
+                console.log('Property Inspector connected');
+                
+                // 登録
+                const json = {
+                    event: inRegisterEvent,
+                    uuid: uuid
+                };
+                websocket.send(JSON.stringify(json));
+                
+                // 設定を取得
+                const getSettings = {
+                    event: 'getSettings',
+                    context: uuid
+                };
+                websocket.send(JSON.stringify(getSettings));
+            };
+            
+            websocket.onmessage = (event) => {
+                const message = JSON.parse(event.data);
+                console.log('Received:', message);
+                
+                if (message.event === 'didReceiveSettings') {
+                    const settings = message.payload.settings;
+                    
+                    document.getElementById('ipAddress').value = settings.ipAddress || '';
+                    document.getElementById('port').value = settings.port || 4747;
+                    document.getElementById('showPercentage').checked = settings.showPercentage !== false;
+                    document.getElementById('warningLevel').value = settings.warningLevel || 30;
+                    document.getElementById('criticalLevel').value = settings.criticalLevel || 15;
+                    document.getElementById('pollingInterval').value = settings.pollingInterval || 10;
+                }
+            };
+            
+            websocket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        };
+        
+        // 設定を保存
+        function saveSettings() {
+            if (!websocket || websocket.readyState !== WebSocket.OPEN) {
+                console.log('WebSocket not ready');
+                return;
+            }
+            
+            const settings = {
+                ipAddress: document.getElementById('ipAddress').value,
+                port: parseInt(document.getElementById('port').value) || 4747,
+                showPercentage: document.getElementById('showPercentage').checked,
+                warningLevel: parseInt(document.getElementById('warningLevel').value) || 30,
+                criticalLevel: parseInt(document.getElementById('criticalLevel').value) || 15,
+                pollingInterval: parseInt(document.getElementById('pollingInterval').value) || 10
+            };
+            
+            console.log('Saving settings:', settings);
+            
+            const json = {
+                event: 'setSettings',
+                context: uuid,
+                payload: settings
+            };
+            websocket.send(JSON.stringify(json));
+        }
+
+        // 入力ハンドラー（少し遅延を入れて保存）
+        let saveTimeout = null;
+        function debouncedSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveSettings, 500);
+        }
+        
+        document.getElementById('ipAddress').addEventListener('input', debouncedSave);
+        document.getElementById('port').addEventListener('input', debouncedSave);
+        document.getElementById('showPercentage').addEventListener('change', debouncedSave);
+        document.getElementById('warningLevel').addEventListener('input', debouncedSave);
+        document.getElementById('criticalLevel').addEventListener('input', debouncedSave);
+        document.getElementById('pollingInterval').addEventListener('input', debouncedSave);
+        
+        // 接続テスト
+        document.getElementById('test-connection').addEventListener('click', async () => {
+            const ipAddress = document.getElementById('ipAddress').value;
+            const port = document.getElementById('port').value;
+            const resultDiv = document.getElementById('test-result');
+            
+            if (!ipAddress) {
+                resultDiv.textContent = i18n.t('message.enter-ip', 'Please enter IP address or hostname');
+                resultDiv.style.backgroundColor = '#dc3545';
+                resultDiv.style.color = '#ffffff';
+                return;
+            }
+            
+            resultDiv.textContent = i18n.t('message.testing', 'Testing connection...');
+            resultDiv.style.backgroundColor = '#17a2b8';
+            resultDiv.style.color = '#ffffff';
+            
+            try {
+                // DroidCamの端末名を取得してテスト
+                const response = await fetch(`http://${ipAddress}:${port}/v1/phone/name`);
+                
+                if (response.ok) {
+                    const deviceName = await response.text();
+                    resultDiv.textContent = i18n.t('message.connected', 'Connected successfully!') + `: ${deviceName}`;
+                    resultDiv.style.backgroundColor = '#28a745';
+                    resultDiv.style.color = '#ffffff';
+                    
+                    // プラグインに接続成功を通知
+                    if (websocket && websocket.readyState === WebSocket.OPEN) {
+                        const notification = {
+                            event: 'sendToPlugin',
+                            action: actionInfo?.action,
+                            context: uuid,
+                            payload: {
+                                action: 'testConnection',
+                                success: true,
+                                deviceName: deviceName
+                            }
+                        };
+                        websocket.send(JSON.stringify(notification));
+                    }
+                    
+                    // 設定を保存
+                    saveSettings();
+                } else {
+                    resultDiv.textContent = i18n.t('message.disconnected', 'Connection failed') + `: ${response.status}`;
+                    resultDiv.style.backgroundColor = '#dc3545';
+                    resultDiv.style.color = '#ffffff';
+                }
+            } catch (error) {
+                resultDiv.textContent = i18n.t('message.error', 'Error: ') + error.message;
+                resultDiv.style.backgroundColor = '#dc3545';
+                resultDiv.style.color = '#ffffff';
+            }
+        });
+    </script>
+</body>
+</html>

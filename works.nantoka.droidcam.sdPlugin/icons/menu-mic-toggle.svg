@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g transform="translate(72,72) scale(1.7) translate(-72,-72)">
+    <path d="M72,40h0c6.55,0,11.85,5.31,11.85,11.85v18.96c0,6.55-5.31,11.85-11.85,11.85h0c-6.55,0-11.85-5.31-11.85-11.85v-18.96c0-6.55,5.31-11.85,11.85-11.85Z" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    <line x1="72" y1="92.15" x2="72" y2="104" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+    <path d="M93.33,70.81c0,11.78-9.55,21.33-21.33,21.33s-21.33-9.55-21.33-21.33" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+  </g>
+</svg>

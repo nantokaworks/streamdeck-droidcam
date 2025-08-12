@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g>
+    <path d="M76.97,91.23h7.35c2.03,0,3.68,1.65,3.68,3.68s-1.65,3.68-3.68,3.68h-7.35v-13.97h6.25c1.83,0,3.31,1.48,3.31,3.31s-1.48,3.31-3.31,3.31" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <polyline points="56 84.61 59.49 98.58 64.15 89.27 68.81 98.58 72.3 84.61" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  </g>
+  <g>
+    <line x1="65.85" y1="71.42" x2="78.15" y2="71.42" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <path d="M64.42,61.42c-2.96-2.32-4.7-5.86-4.72-9.62-.04-6.67,5.34-12.22,12.01-12.38,6.79-.16,12.44,5.21,12.6,12,.09,3.88-1.65,7.58-4.7,9.98-.91.7-1.44,1.79-1.45,2.94v.92c0,.68-.55,1.23-1.23,1.23h-9.85c-.68,0-1.23-.55-1.23-1.23v-.92c0-1.14-.53-2.22-1.43-2.92Z" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <path d="M73.23,44.34c3.08.52,5.63,3.08,6.15,6.15" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  </g>
+</svg>
