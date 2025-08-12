@@ -8,6 +8,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const manifestPath = join(__dirname, '..', 'works.nantoka.droidcam.sdPlugin', 'manifest.json');
 
 async function incrementBuildNumber() {
+    // 環境変数でスキップ設定を確認
+    if (process.env.SKIP_VERSION_INCREMENT === 'true') {
+        console.log('⏭️  Skipping version increment (SKIP_VERSION_INCREMENT=true)');
+        process.exit(0);
+    }
+    
     try {
         // manifest.jsonを読み込み
         const manifestContent = await readFile(manifestPath, 'utf-8');

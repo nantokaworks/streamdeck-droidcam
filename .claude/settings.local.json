@@ -24,7 +24,8 @@
       "Bash(grep:*)",
       "Bash(mkdir:*)",
       "Bash(/usr/bin/diff -u /Users/toka/Abyss/streamdeck-droidcam/src_backup/actions/zoom-control.ts /Users/toka/Abyss/streamdeck-droidcam/src/actions/zoom-control.ts)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(bun:*)"
     ],
     "deny": []
   }

@@ -16,16 +16,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15.1'
+        
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
+          bun-version: '1.1.42'
           
       - name: Install dependencies
         run: bun install
         
-      - name: Build plugin
-        run: bun run build
+      - name: Save original manifest.json
+        run: cp works.nantoka.droidcam.sdPlugin/manifest.json manifest.json.original
+        
+      - name: Build plugin (without version increment)
+        run: |
+          # GitHub Actionsではバージョンインクリメントをスキップ
+          export SKIP_VERSION_INCREMENT=true
+          rollup -c
         
       - name: Verify build output
         run: |
@@ -35,6 +46,9 @@ jobs:
           wc -c works.nantoka.droidcam.sdPlugin/bin/plugin.js
           echo "=== Checking if plugin.js is executable ==="
           file works.nantoka.droidcam.sdPlugin/bin/plugin.js
+          echo "=== Comparing manifest versions ==="
+          echo "Original version: $(grep '"Version"' manifest.json.original | cut -d'"' -f4)"
+          echo "Current version: $(grep '"Version"' works.nantoka.droidcam.sdPlugin/manifest.json | cut -d'"' -f4)"
         
       - name: Create release directory
         run: mkdir -p release
