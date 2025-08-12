@@ -9,6 +9,8 @@ jobs:
   release:
     name: Create Release
     runs-on: macos-latest  # Stream Deck Distribution Tool は macOS と Windows のみサポート
+    permissions:
+      contents: write  # リリース作成とファイルアップロードに必要
     
     steps:
       - name: Checkout code
@@ -34,20 +36,12 @@ jobs:
       - name: Package Stream Deck plugin
         run: streamdeck pack works.nantoka.droidcam.sdPlugin --force
         
-      - name: Get tag name
-        id: tag
-        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-        
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          release_name: DroidCam Stream Deck Plugin ${{ steps.tag.outputs.tag }}
+          name: DroidCam Stream Deck Plugin ${{ github.ref_name }}
           body: |
-            ## DroidCam Stream Deck Plugin ${{ steps.tag.outputs.tag }}
+            ## DroidCam Stream Deck Plugin ${{ github.ref_name }}
             
             ### インストール方法
             1. 下記の `works.nantoka.droidcam.streamDeckPlugin` ファイルをダウンロード
@@ -55,15 +49,6 @@ jobs:
             
             ### 変更内容
             詳細は [HISTORY.md](https://github.com/nantokaworks/streamdeck-droidcam/blob/main/HISTORY.md) を参照してください。
+          files: works.nantoka.droidcam.streamDeckPlugin
           draft: false
           prerelease: false
-          
-      - name: Upload Plugin to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: works.nantoka.droidcam.streamDeckPlugin
-          asset_name: works.nantoka.droidcam.streamDeckPlugin
-          asset_content_type: application/octet-stream
