@@ -1,0 +1,6 @@
+node_modules/
+*.log
+.DS_Store
+works.nantoka.droidcam.sdPlugin/bin/
+works.nantoka.droidcam.sdPlugin/logs/
+*.streamDeckPlugin
