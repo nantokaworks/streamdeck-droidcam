@@ -26,7 +26,8 @@
       "Bash(/usr/bin/diff -u /Users/toka/Abyss/streamdeck-droidcam/src_backup/actions/zoom-control.ts /Users/toka/Abyss/streamdeck-droidcam/src/actions/zoom-control.ts)",
       "Bash(cat:*)",
       "Bash(bun:*)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Bash(git tag:*)"
     ],
     "deny": []
   }

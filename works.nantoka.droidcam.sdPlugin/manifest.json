@@ -1,368 +1,368 @@
 {
-    "Name": "DroidCam",
-    "Version": "1.0.0",
-    "Author": "nantokaworks",
-    "Actions": [
-        {
-            "Name": "Connection Status",
-            "UUID": "works.nantoka.droidcam.connection-status",
-            "Icon": "icons/disconnected",
-            "Tooltip": "Shows DroidCam connection status",
-            "PropertyInspectorPath": "ui/connection-status.html",
-            "Controllers": [
-                "Keypad"
-            ],
-            "States": [
-                {
-                    "Image": "icons/disconnected",
-                    "TitleAlignment": "middle"
-                },
-                {
-                    "Image": "icons/connected",
-                    "TitleAlignment": "middle"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.zoom-button",
-            "Name": "ズームボタン",
-            "Icon": "icons/menu-zoom-button",
-            "Tooltip": "ズームレベルをプリセット切り替え",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/zoom-button.html",
-            "States": [
-                {
-                    "Image": "icons/zoom-in",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.camera-switch",
-            "Name": "Camera Switch",
-            "Icon": "icons/menu-camera-switch",
-            "Tooltip": "Switch between front and back camera",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/camera-switch.html",
-            "States": [
-                {
-                    "Image": "icons/camera-switch",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Back Camera"
-                },
-                {
-                    "Image": "icons/camera-switch",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Front Camera"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.led-toggle",
-            "Name": "LED Toggle",
-            "Icon": "icons/menu-led-toggle",
-            "Tooltip": "Toggle LED flashlight ON/OFF",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/led-toggle.html",
-            "States": [
-                {
-                    "Image": "icons/led-off",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": false,
-                    "Name": "LED OFF"
-                },
-                {
-                    "Image": "icons/led-on",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": false,
-                    "Name": "LED ON"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.mic-toggle",
-            "Name": "Mic Toggle",
-            "Icon": "icons/menu-mic-toggle",
-            "Tooltip": "Toggle microphone mute/unmute",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/mic-toggle.html",
-            "States": [
-                {
-                    "Image": "icons/mic-off",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": false,
-                    "Name": "Mic OFF"
-                },
-                {
-                    "Image": "icons/mic-on",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": false,
-                    "Name": "Mic ON"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.stop-restart-button",
-            "Name": "Stop/Restart",
-            "Icon": "icons/menu-stop-restart",
-            "Tooltip": "Stop or restart DroidCam",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/stop-restart-button.html",
-            "States": [
-                {
-                    "Image": "icons/stop",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Stop"
-                },
-                {
-                    "Image": "icons/restart",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Restart"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.exposure-button",
-            "Name": "Exposure Control",
-            "Icon": "icons/menu-exposure-button",
-            "Tooltip": "Adjust exposure compensation",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/exposure-button.html",
-            "States": [
-                {
-                    "Image": "icons/exposure-up",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.autofocus-button",
-            "Name": "Autofocus",
-            "Icon": "icons/menu-autofocus",
-            "Tooltip": "Trigger autofocus",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/autofocus-button.html",
-            "States": [
-                {
-                    "Image": "icons/autofocus",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": false
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.focus-mode-button",
-            "Name": "Focus Mode",
-            "Icon": "icons/menu-focus-mode",
-            "Tooltip": "Switch focus mode",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/focus-mode-button.html",
-            "States": [
-                {
-                    "Image": "icons/focus-normal",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.wb-mode-button",
-            "Name": "White Balance",
-            "Icon": "icons/menu-wb-mode",
-            "Tooltip": "Change white balance mode",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/wb-mode-button.html",
-            "States": [
-                {
-                    "Image": "icons/wb-auto",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.exposure-lock-button",
-            "Name": "Exposure Lock",
-            "Icon": "icons/menu-exposure-lock",
-            "Tooltip": "Toggle exposure lock",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/exposure-lock-button.html",
-            "States": [
-                {
-                    "Image": "icons/menu-exposure-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Unlocked"
-                },
-                {
-                    "Image": "icons/menu-exposure-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Locked"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.wb-lock-button",
-            "Name": "WB Lock",
-            "Icon": "icons/menu-wb-lock",
-            "Tooltip": "Toggle white balance lock",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/wb-lock-button.html",
-            "States": [
-                {
-                    "Image": "icons/wb-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Unlocked"
-                },
-                {
-                    "Image": "icons/wb-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true,
-                    "Name": "Locked"
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.battery-status",
-            "Name": "Battery Status",
-            "Icon": "icons/menu-battery-status",
-            "Tooltip": "Display device battery status",
-            "Controllers": [
-                "Keypad"
-            ],
-            "PropertyInspectorPath": "ui/battery-status.html",
-            "States": [
-                {
-                    "Image": "icons/battery",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.zoom-control",
-            "Name": "Zoom Control",
-            "Icon": "icons/menu-zoom-control",
-            "Tooltip": "Control zoom with dial or button reset",
-            "Controllers": [
-                "Encoder"
-            ],
-            "PropertyInspectorPath": "ui/zoom-control.html",
-            "Encoder": {
-                "layout": "$B1",
-                "Icon": "icons/zoom-control",
-                "TriggerDescription": {
-                    "Rotate": "Adjust zoom level",
-                    "Push": "Reset zoom to 1.0x"
-                }
-            },
-            "States": [
-                {
-                    "Image": "icons/zoom-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        },
-        {
-            "UUID": "works.nantoka.droidcam.exposure-control",
-            "Name": "Exposure Control",
-            "Icon": "icons/menu-exposure-control",
-            "Tooltip": "Control exposure with dial or button reset",
-            "Controllers": [
-                "Encoder"
-            ],
-            "PropertyInspectorPath": "ui/exposure-control.html",
-            "Encoder": {
-                "layout": "$B1",
-                "Icon": "icons/exposure-control",
-                "TriggerDescription": {
-                    "Rotate": "Adjust exposure value",
-                    "Push": "Reset exposure to 0"
-                }
-            },
-            "States": [
-                {
-                    "Image": "icons/exposure-control",
-                    "TitleAlignment": "bottom",
-                    "FontSize": 12,
-                    "ShowTitle": true
-                }
-            ]
-        }
-    ],
-    "Category": "DroidCam",
-    "CategoryIcon": "icons/category-icon",
-    "CodePath": "bin/plugin.js",
-    "Description": "DroidCam control plugin for Stream Deck",
-    "URL": "https://github.com/nantokaworks/streamdeck-droidcam",
-    "Icon": "icons/icon",
-    "SDKVersion": 2,
-    "Software": {
-        "MinimumVersion": "6.5"
-    },
-    "OS": [
-        {
-            "Platform": "mac",
-            "MinimumVersion": "10.15"
-        },
-        {
-            "Platform": "windows",
-            "MinimumVersion": "10"
-        }
-    ],
-    "Nodejs": {
-        "Version": "20",
-        "Debug": "enabled"
-    },
-    "UUID": "works.nantoka.droidcam"
+	"Name": "DroidCam",
+	"Version": "1.0.0.90",
+	"Author": "nantokaworks",
+	"Actions": [
+		{
+			"Name": "Connection Status",
+			"UUID": "works.nantoka.droidcam.connection-status",
+			"Icon": "icons/disconnected",
+			"Tooltip": "Shows DroidCam connection status",
+			"PropertyInspectorPath": "ui/connection-status.html",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "icons/disconnected",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "icons/connected",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.zoom-button",
+			"Name": "ズームボタン",
+			"Icon": "icons/menu-zoom-button",
+			"Tooltip": "ズームレベルをプリセット切り替え",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/zoom-button.html",
+			"States": [
+				{
+					"Image": "icons/zoom-in",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.camera-switch",
+			"Name": "Camera Switch",
+			"Icon": "icons/menu-camera-switch",
+			"Tooltip": "Switch between front and back camera",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/camera-switch.html",
+			"States": [
+				{
+					"Image": "icons/camera-switch",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Back Camera"
+				},
+				{
+					"Image": "icons/camera-switch",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Front Camera"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.led-toggle",
+			"Name": "LED Toggle",
+			"Icon": "icons/menu-led-toggle",
+			"Tooltip": "Toggle LED flashlight ON/OFF",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/led-toggle.html",
+			"States": [
+				{
+					"Image": "icons/led-off",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": false,
+					"Name": "LED OFF"
+				},
+				{
+					"Image": "icons/led-on",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": false,
+					"Name": "LED ON"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.mic-toggle",
+			"Name": "Mic Toggle",
+			"Icon": "icons/menu-mic-toggle",
+			"Tooltip": "Toggle microphone mute/unmute",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/mic-toggle.html",
+			"States": [
+				{
+					"Image": "icons/mic-off",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": false,
+					"Name": "Mic OFF"
+				},
+				{
+					"Image": "icons/mic-on",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": false,
+					"Name": "Mic ON"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.stop-restart-button",
+			"Name": "Stop/Restart",
+			"Icon": "icons/menu-stop-restart",
+			"Tooltip": "Stop or restart DroidCam",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/stop-restart-button.html",
+			"States": [
+				{
+					"Image": "icons/stop",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Stop"
+				},
+				{
+					"Image": "icons/restart",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Restart"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.exposure-button",
+			"Name": "Exposure Control",
+			"Icon": "icons/menu-exposure-button",
+			"Tooltip": "Adjust exposure compensation",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/exposure-button.html",
+			"States": [
+				{
+					"Image": "icons/exposure-up",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.autofocus-button",
+			"Name": "Autofocus",
+			"Icon": "icons/menu-autofocus",
+			"Tooltip": "Trigger autofocus",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/autofocus-button.html",
+			"States": [
+				{
+					"Image": "icons/autofocus",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": false
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.focus-mode-button",
+			"Name": "Focus Mode",
+			"Icon": "icons/menu-focus-mode",
+			"Tooltip": "Switch focus mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/focus-mode-button.html",
+			"States": [
+				{
+					"Image": "icons/focus-normal",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.wb-mode-button",
+			"Name": "White Balance",
+			"Icon": "icons/menu-wb-mode",
+			"Tooltip": "Change white balance mode",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/wb-mode-button.html",
+			"States": [
+				{
+					"Image": "icons/wb-auto",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.exposure-lock-button",
+			"Name": "Exposure Lock",
+			"Icon": "icons/menu-exposure-lock",
+			"Tooltip": "Toggle exposure lock",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/exposure-lock-button.html",
+			"States": [
+				{
+					"Image": "icons/menu-exposure-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Unlocked"
+				},
+				{
+					"Image": "icons/menu-exposure-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Locked"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.wb-lock-button",
+			"Name": "WB Lock",
+			"Icon": "icons/menu-wb-lock",
+			"Tooltip": "Toggle white balance lock",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/wb-lock-button.html",
+			"States": [
+				{
+					"Image": "icons/wb-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Unlocked"
+				},
+				{
+					"Image": "icons/wb-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true,
+					"Name": "Locked"
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.battery-status",
+			"Name": "Battery Status",
+			"Icon": "icons/menu-battery-status",
+			"Tooltip": "Display device battery status",
+			"Controllers": [
+				"Keypad"
+			],
+			"PropertyInspectorPath": "ui/battery-status.html",
+			"States": [
+				{
+					"Image": "icons/battery",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.zoom-control",
+			"Name": "Zoom Control",
+			"Icon": "icons/menu-zoom-control",
+			"Tooltip": "Control zoom with dial or button reset",
+			"Controllers": [
+				"Encoder"
+			],
+			"PropertyInspectorPath": "ui/zoom-control.html",
+			"Encoder": {
+				"layout": "$B1",
+				"Icon": "icons/zoom-control",
+				"TriggerDescription": {
+					"Rotate": "Adjust zoom level",
+					"Push": "Reset zoom to 1.0x"
+				}
+			},
+			"States": [
+				{
+					"Image": "icons/zoom-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "works.nantoka.droidcam.exposure-control",
+			"Name": "Exposure Control",
+			"Icon": "icons/menu-exposure-control",
+			"Tooltip": "Control exposure with dial or button reset",
+			"Controllers": [
+				"Encoder"
+			],
+			"PropertyInspectorPath": "ui/exposure-control.html",
+			"Encoder": {
+				"layout": "$B1",
+				"Icon": "icons/exposure-control",
+				"TriggerDescription": {
+					"Rotate": "Adjust exposure value",
+					"Push": "Reset exposure to 0"
+				}
+			},
+			"States": [
+				{
+					"Image": "icons/exposure-control",
+					"TitleAlignment": "bottom",
+					"FontSize": 12,
+					"ShowTitle": true
+				}
+			]
+		}
+	],
+	"Category": "DroidCam",
+	"CategoryIcon": "icons/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "DroidCam control plugin for Stream Deck",
+	"URL": "https://github.com/nantokaworks/streamdeck-droidcam",
+	"Icon": "icons/icon",
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.5"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.15"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "works.nantoka.droidcam"
 }
