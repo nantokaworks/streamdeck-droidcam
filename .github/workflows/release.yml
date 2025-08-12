@@ -27,14 +27,33 @@ jobs:
       - name: Build plugin
         run: bun run build
         
+      - name: Verify build output
+        run: |
+          echo "=== Checking build output ==="
+          ls -la works.nantoka.droidcam.sdPlugin/bin/
+          echo "=== Plugin.js file size ==="
+          wc -c works.nantoka.droidcam.sdPlugin/bin/plugin.js
+          echo "=== Checking if plugin.js is executable ==="
+          file works.nantoka.droidcam.sdPlugin/bin/plugin.js
+        
       - name: Create release directory
         run: mkdir -p release
         
       - name: Install Elgato Stream Deck CLI
         run: bun add -g @elgato/cli
         
+      - name: Validate plugin structure
+        run: streamdeck validate works.nantoka.droidcam.sdPlugin
+        
       - name: Package Stream Deck plugin
         run: streamdeck pack works.nantoka.droidcam.sdPlugin --force
+        
+      - name: Verify package output
+        run: |
+          echo "=== Checking packaged file ==="
+          ls -la works.nantoka.droidcam.streamDeckPlugin
+          echo "=== Package size ==="
+          wc -c works.nantoka.droidcam.streamDeckPlugin
         
       - name: Create Release
         uses: softprops/action-gh-release@v1
